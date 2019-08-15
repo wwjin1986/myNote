@@ -2,13 +2,13 @@
   "name": "mynote",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://wwjin1986.github.io/myNote/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "fontawesome": "^5.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1",
-    "homepage": "https://wwjin1986.github.io/myNote/"
+    "react-scripts": "3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
