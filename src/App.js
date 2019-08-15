@@ -7,12 +7,12 @@ function App() {
   return (
     <React.Fragment>
       <div className="App">
-        <div className="App-header">
+        {/* <div className="App-header">
           <NavBar />
-        </div>
+        </div> */}
         <div className="App-body">
           <span>test</span>
-          <Note />
+          // <Note />
         </div>
       </div>
     </React.Fragment>
