@@ -12,7 +12,7 @@ function App() {
         </div> */}
         <div className="App-body">
           <span>test</span>
-          // <Note />
+          {/* <Note /> */}
         </div>
       </div>
     </React.Fragment>
