@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <div className="NavBar ">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <Link className="navbar-brand nav-custom" to="">
+        <Link className="navbar-brand nav-brand-custom" to="">
           My Note
         </Link>
         <button

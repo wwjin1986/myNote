@@ -1,3 +1,11 @@
 .nav-custom {
   color: white !important;
+  font-size: 1.2em !important;
+}
+.nav-brand-custom {
+  color: white !important;
+  font-size: 2em !important;
+  font-family: Futura, Trebuchet MS, Arial, sans-serif !important;
+  margin-right: 1em !important;
+  margin-left: 1em !important;
 }

@@ -1,7 +1,27 @@
 import React, { Component } from "react";
 import "../css/Note.css";
 class Note extends Component {
-  state = {};
+  state = {
+    topic: "Choose...",
+    title: "",
+    URL: "",
+    notes: "tt"
+  };
+  handleSubmit = () => {
+    console.log(this.state.notes);
+  };
+  handleChangeTopic = event => {
+    this.setState({ topic: event.target.value });
+  };
+  handleChangeTitle = event => {
+    this.setState({ title: event.target.value });
+  };
+  handleChangeURL = event => {
+    this.setState({ URL: event.target.value });
+  };
+  handleChangeNotes = event => {
+    this.setState({ notes: event.target.value });
+  };
   render() {
     return (
       <React.Fragment>
@@ -14,12 +34,14 @@ class Note extends Component {
                 <select
                   className="custom-select my-1 mr-sm-2"
                   id="inlineFormCustomSelectPref"
+                  onChange={this.handleChangeTopic}
+                  value={this.state.value}
                 >
                   <option defaultValue>Choose...</option>
-                  <option value="1">Java</option>
-                  <option value="2">React</option>
-                  <option value="3">Postgre</option>
-                  <option value="3">Add new topic</option>
+                  <option value="Java">Java</option>
+                  <option value="React">React</option>
+                  <option value="Postgre">Postgre</option>
+                  <option value="Add">Add new topic</option>
                 </select>
               </div>
               <div className="form-group">
@@ -30,6 +52,7 @@ class Note extends Component {
                   id="inputTitle"
                   aria-describedby="titleHelp"
                   placeholder="Enter title for new note"
+                  onChange={this.handleChangeTitle}
                 />
               </div>
               <div className="form-group">
@@ -39,6 +62,7 @@ class Note extends Component {
                   className="form-control"
                   id="inputURL"
                   placeholder="Enter tutorial url (optional)"
+                  onChange={this.handleChangeURL}
                 />
               </div>
               <div className="form-group">
@@ -49,9 +73,14 @@ class Note extends Component {
                   placeholder="Enter note details here"
                   cols="30"
                   rows="15"
+                  onChange={this.handleChangeNotes}
                 />
               </div>
-              <button type="submit" className="btn btn-custom">
+              <button
+                type="submit"
+                className="btn btn-custom"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </button>
             </form>
