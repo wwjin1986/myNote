@@ -1,14 +1,39 @@
 import React, { Component } from "react";
 import "../css/Note.css";
+import fetchGetAPI from "../commons/fetchGetAPI";
+import config from "../commons/config.json";
+import fetchPostAPI from "../commons/fetchPostAPI";
 class Note extends Component {
   state = {
     topic: "Choose...",
     title: "",
     URL: "",
-    notes: "tt"
+    noteText: "",
+    categories: [],
+    show: "true"
   };
+
+  async componentDidMount() {
+    fetchGetAPI(config.apiEndPoint + "/categories")
+      .then(data =>
+        Object.keys(data).length
+          ? this.setState({
+              categories: data
+            })
+          : {}
+      )
+      .catch(error => {
+        throw error;
+      });
+  }
   handleSubmit = () => {
-    console.log(this.state.notes);
+    let body = JSON.stringify({
+      topic: this.state.topic,
+      title: this.state.title,
+      url: this.state.URL,
+      noteText: this.state.noteText
+    });
+    fetchPostAPI(config.apiEndPoint + "/notes", body);
   };
   handleChangeTopic = event => {
     this.setState({ topic: event.target.value });
@@ -20,8 +45,9 @@ class Note extends Component {
     this.setState({ URL: event.target.value });
   };
   handleChangeNotes = event => {
-    this.setState({ notes: event.target.value });
+    this.setState({ noteText: event.target.value });
   };
+  handleClose = () => {};
   render() {
     return (
       <React.Fragment>
@@ -30,7 +56,7 @@ class Note extends Component {
           <div className="Note-form">
             <form>
               <div className="form-group">
-                <label className="my-1 mr-2">Topic</label>
+                <label className="my-1 mr-2">Topic</label>{" "}
                 <select
                   className="custom-select my-1 mr-sm-2"
                   id="inlineFormCustomSelectPref"
@@ -38,9 +64,12 @@ class Note extends Component {
                   value={this.state.value}
                 >
                   <option defaultValue>Choose...</option>
-                  <option value="Java">Java</option>
-                  <option value="React">React</option>
-                  <option value="Postgre">Postgre</option>
+                  {this.state.categories.map(category => (
+                    <option key={category.id} value={category.topic}>
+                      {category.topic}
+                    </option>
+                  ))}
+
                   <option value="Add">Add new topic</option>
                 </select>
               </div>
