@@ -1,3 +1,25 @@
-.Note {
+.Note-header {
   text-align: center;
+  background-color: white;
+  font-size: 1.5em;
+}
+.Note-body {
+  background-color: #d4d4d4;
+  min-height: 100vh;
+  position: relative;
+}
+.Note-form {
+  background-color: white;
+  width: 80%;
+  height: 50%;
+  margin: 0 auto;
+  position: relative;
+  top: 2em;
+  text-align: left;
+}
+.form-group {
+  margin-left: 5em;
+  top: 1em;
+  position: relative;
+  margin-right: 5em;
 }
