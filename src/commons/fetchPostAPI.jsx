@@ -1,5 +1,5 @@
 const fetchPostAPI = async (url, body) => {
-  await fetch(url, {
+  return await fetch(url, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, cors, *same-origin
     headers: {
@@ -7,7 +7,11 @@ const fetchPostAPI = async (url, body) => {
     },
     body: body,
     cache: "no-cache" // *default, no-cache, reload, force-cache, only-if-cached // body data type must match "Content-Type" header
-  });
+  })
+    .then(response => response.json())
+    .catch(error => {
+      return error;
+    });
 };
 
 export default fetchPostAPI;

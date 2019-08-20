@@ -22,7 +22,7 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <Link className="nav-link nav-custom" to={"/today"}>
+              <Link className="nav-link nav-custom" to={"/"}>
                 Home
               </Link>
             </li>
@@ -32,7 +32,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link nav-custom" to={"/addweight"}>
+              <Link className="nav-link nav-custom" to={"/addnote"}>
                 Manage
               </Link>
             </li>

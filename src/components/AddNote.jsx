@@ -4,6 +4,8 @@ import fetchGetAPI from "../commons/fetchGetAPI";
 import config from "../commons/config.json";
 import fetchPostAPI from "../commons/fetchPostAPI";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { withRouter } from "react-router-dom";
+
 class Note extends Component {
   state = {
     topic: "Choose...",
@@ -36,7 +38,9 @@ class Note extends Component {
       url: this.state.URL,
       noteText: this.state.noteText
     });
-    fetchPostAPI(config.apiEndPoint + "/notes", body);
+    fetchPostAPI(config.apiEndPoint + "/notes", body).then(data =>
+      this.props.history.push("/viewnote/" + data.id)
+    );
   };
   handleChangeTopic = event => {
     if (event.target.value === "Add") this.handleToggleModal();
@@ -93,7 +97,11 @@ class Note extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="Note-header">Add new note</div>
+        <div className="Note-header">
+          <i className="fa fa-sticky-note-o" aria-hidden="true" />
+          {"    "}
+          Add new note
+        </div>
         <div className="Note-body">
           <div className="Note-form">
             <form>
@@ -108,7 +116,7 @@ class Note extends Component {
                   <option defaultValue>Choose...</option>
                   {this.state.categories.map(category => (
                     <option key={category.id} value={category.topic}>
-                      {category.topic}
+                      {category.topic + "  (" + category.category + ")"}
                     </option>
                   ))}
 
@@ -118,7 +126,10 @@ class Note extends Component {
 
               <div>
                 <Modal isOpen={this.state.showModal}>
-                  <ModalHeader>Add new topic</ModalHeader>
+                  <ModalHeader>
+                    <i className="fa fa-list-ul" aria-hidden="true" />
+                    {"    "}Add new topic
+                  </ModalHeader>
                   <ModalBody className="ModalBody">
                     <div className="row">
                       <div className="form-group col-md-6">

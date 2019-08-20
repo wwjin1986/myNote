@@ -5,6 +5,7 @@
   "homepage": "https://wwjin1986.github.io/myNote/",
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
     "react": "^16.9.0",
     "react-bootstrap-modal": "^4.2.0",
