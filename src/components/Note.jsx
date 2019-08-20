@@ -3,6 +3,7 @@ import "../css/Note.css";
 import fetchGetAPI from "../commons/fetchGetAPI";
 import config from "../commons/config.json";
 import fetchPostAPI from "../commons/fetchPostAPI";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 class Note extends Component {
   state = {
     topic: "Choose...",
@@ -10,7 +11,9 @@ class Note extends Component {
     URL: "",
     noteText: "",
     categories: [],
-    show: "true"
+    showModal: false,
+    modalTopic: "",
+    modalCategory: ""
   };
 
   async componentDidMount() {
@@ -36,7 +39,10 @@ class Note extends Component {
     fetchPostAPI(config.apiEndPoint + "/notes", body);
   };
   handleChangeTopic = event => {
-    this.setState({ topic: event.target.value });
+    if (event.target.value === "Add") this.handleToggleModal();
+    else {
+      this.setState({ topic: event.target.value });
+    }
   };
   handleChangeTitle = event => {
     this.setState({ title: event.target.value });
@@ -47,7 +53,43 @@ class Note extends Component {
   handleChangeNotes = event => {
     this.setState({ noteText: event.target.value });
   };
-  handleClose = () => {};
+  handleToggleModal = () => {
+    this.state.showModal === false
+      ? this.setState({ showModal: true })
+      : this.setState({ showModal: false });
+  };
+
+  handleChangeTopicModal = event => {
+    this.setState({ modalTopic: event.target.value }, () =>
+      console.log(this.state.modalTopic)
+    );
+  };
+  handleChangeCategoryModal = event => {
+    this.setState({ modalCategory: event.target.value }, () =>
+      console.log(this.state.modalCategory)
+    );
+  };
+  handleSubmitNewTopic = () => {
+    let body = JSON.stringify({
+      topic: this.state.modalTopic,
+      category: this.state.modalCategory
+    });
+    //save to table category
+    fetchPostAPI(config.apiEndPoint + "/categories", body);
+    //fetch table category to update topic options
+    fetchGetAPI(config.apiEndPoint + "/categories")
+      .then(data =>
+        Object.keys(data).length
+          ? this.setState({
+              categories: data
+            })
+          : {}
+      )
+      .catch(error => {
+        throw error;
+      });
+    this.setState({ showModal: false });
+  };
   render() {
     return (
       <React.Fragment>
@@ -73,6 +115,52 @@ class Note extends Component {
                   <option value="Add">Add new topic</option>
                 </select>
               </div>
+
+              <div>
+                <Modal isOpen={this.state.showModal}>
+                  <ModalHeader>Add new topic</ModalHeader>
+                  <ModalBody className="ModalBody">
+                    <div className="row">
+                      <div className="form-group col-md-6">
+                        <label>Topic</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="modalTopic"
+                          placeholder="Enter topic name here"
+                          onChange={this.handleChangeTopicModal}
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="form-group col-md-6">
+                        <label>Category</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="modalCategory"
+                          onChange={this.handleChangeCategoryModal}
+                        />
+                      </div>
+                    </div>
+                  </ModalBody>
+                  <ModalFooter>
+                    <input
+                      value="Submit"
+                      className="btn btn-note-custom"
+                      onClick={this.handleSubmitNewTopic}
+                      readOnly
+                    />
+                    <input
+                      onClick={this.handleToggleModal}
+                      value="Cancel"
+                      className="btn btn-note-custom"
+                      readOnly
+                    />
+                  </ModalFooter>
+                </Modal>
+              </div>
+
               <div className="form-group">
                 <label>Title</label>
                 <input
