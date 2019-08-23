@@ -4,7 +4,6 @@
   font-size: 1.5em;
   height: 3em;
   line-height: 3em;
-  font-weight: bold;
 }
 .Note-body {
   background-color: #d4d4d4;
@@ -14,7 +13,7 @@
 .Note-form {
   background-color: white;
   width: 80%;
-  height: 50%;
+  height: 100vh;
   margin: 0 auto;
   position: relative;
   top: 2em;
@@ -40,4 +39,24 @@
   margin-top: 1em !important;
   margin-bottom: 2em !important;
   margin-right: 0.5em !important;
+}
+.Note-table {
+  background-color: white;
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  top: 2em;
+  text-align: center;
+}
+
+a {
+  font-size: 0.8em;
+}
+table caption {
+  caption-side: top;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+  margin-top: 1em;
 }

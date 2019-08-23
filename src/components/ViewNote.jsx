@@ -22,25 +22,61 @@ class ViewNote extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="Note-header">Note: {this.state.title} added</div>
+        <div className="Note-header">
+          <i className="fa fa-check-square-o" aria-hidden="true" />
+          {"  "}
+          <a>New note added</a>
+        </div>
         <div className="Note-body">
-          <div className="Note-form">
-            <div className="form-group">
-              <label className="my-1 mr-2">Topic</label>{" "}
-              <label className="my-1 mr-2">{this.state.topic}</label>{" "}
-            </div>
-            <div className="form-group">
-              <label className="my-1 mr-2">Url</label>{" "}
-              <label className="my-1 mr-2">{this.state.url}</label>{" "}
-            </div>
-            <div className="form-group">
-              <label className="my-1 mr-2">Note</label>{" "}
-              <p style={{ whiteSpace: "pre-line" }}>{this.state.noteText}</p>
-            </div>
-            <div className="form-group">
-              <label className="my-1 mr-2">Updated At</label>{" "}
-              <label className="my-1 mr-2">{this.state.updatedAt}</label>{" "}
-            </div>
+          <div className="Note-table">
+            <table className="table table-bordered table-hover ">
+              <caption>{this.state.title}</caption>
+              <tbody>
+                <tr>
+                  <th>
+                    <label className="my-1 mr-2">Topic</label>
+                  </th>
+                  <td>
+                    <label className="my-1 mr-2">{this.state.topic}</label>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <label className="my-1 mr-2">Url</label>
+                  </th>
+                  <td>
+                    <a
+                      href={this.state.url}
+                      className="my-1 mr-2"
+                      target="_blank"
+                    >
+                      {this.state.url}
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <label className="my-1 mr-2">Note</label>
+                  </th>
+                  <td>
+                    <p style={{ whiteSpace: "pre-line" }}>
+                      {this.state.noteText}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    <label className="my-1 mr-2">Updated At</label>
+                  </th>
+                  <td>
+                    <label className="my-1 mr-2">{this.state.updatedAt}</label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="submit" className="btn btn-custom">
+              Add Note
+            </button>
           </div>
         </div>
       </React.Fragment>
