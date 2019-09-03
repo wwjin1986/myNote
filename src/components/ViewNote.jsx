@@ -19,6 +19,19 @@ class ViewNote extends Component {
       });
     });
   }
+  handleDelete = () => {
+    console.log("handleDelete");
+  };
+  handleEdit = () => {
+    console.log("edit");
+  };
+  handleChanglePage = event => {
+    if (event.target.id === "viewTopic") {
+      this.props.history.push("/notes/allnotes");
+    } else {
+      console.log(event.target.id);
+    }
+  };
   render() {
     return (
       <React.Fragment>
@@ -74,9 +87,30 @@ class ViewNote extends Component {
                 </tr>
               </tbody>
             </table>
-            <button type="submit" className="btn btn-custom">
-              Add Note
-            </button>
+            <div>
+              <button
+                id="edit"
+                className="btn btn-view-custom"
+                onClick={this.handleEdit}
+              >
+                Edit this note
+              </button>
+              <button
+                id="delete"
+                className="btn btn-view-custom"
+                onClick={this.handleDelete}
+              >
+                Delete this note
+              </button>
+
+              <button
+                id="viewTopic"
+                className="btn btn-view-custom"
+                onClick={this.handleChanglePage}
+              >
+                View notes about "<b>{this.state.topic}</b>"
+              </button>
+            </div>
           </div>
         </div>
       </React.Fragment>

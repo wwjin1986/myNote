@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import ViewNote from "./components/ViewNote";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
-
+import ViewAllNotes from "./components/ViewAllNotes";
 function App() {
   return (
     <React.Fragment>
@@ -17,6 +17,7 @@ function App() {
           <Switch>
             <Route path="/addnote" component={Note} />
             <Route path="/viewnote/:id" component={ViewNote} />
+            <Route path="/viewallnotes" component={ViewAllNotes} />
             <Route path="/" component={ViewNote} />
           </Switch>
         </div>

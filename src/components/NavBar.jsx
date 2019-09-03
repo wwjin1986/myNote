@@ -27,13 +27,13 @@ const NavBar = () => {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link className="nav-link nav-custom" to={"/addexercise"}>
-                Notes
+              <Link className="nav-link nav-custom" to={"/viewallnotes"}>
+                All Notes
               </Link>
             </li>
             <li className="nav-item active">
               <Link className="nav-link nav-custom" to={"/addnote"}>
-                Manage
+                Add new Note
               </Link>
             </li>
           </ul>
