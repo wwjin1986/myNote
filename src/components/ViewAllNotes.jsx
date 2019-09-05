@@ -17,8 +17,11 @@ class ViewAllNotes extends Component {
       });
   }
 
-  handleDelete = () => {
-    console.log("delete");
+  handleDelete = event => {
+    console.log(event.currentTarget.id);
+  };
+  handleDetail = event => {
+    this.props.history.push("/viewnote/" + event.currentTarget.id);
   };
   render() {
     return (
@@ -26,7 +29,7 @@ class ViewAllNotes extends Component {
         <div className="Note-header">All Notes</div>
         <div className="Note-body">
           <div className="Note-table">
-            <table className="table table-striped">
+            <table className="table table-striped table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -43,8 +46,24 @@ class ViewAllNotes extends Component {
                     <td>{note.id}</td>
                     <td>{note.topic}</td>
                     <td>{note.title}</td>
-                    <td>delete</td>
-                    <td>detail</td>
+                    <td>
+                      <button
+                        className="btn btn-outline-dark btn-sm"
+                        id={note.id}
+                        onClick={this.handleDelete}
+                      >
+                        <i className="fa fa-trash-o" aria-hidden="true" />
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-outline-dark btn-sm"
+                        id={note.id}
+                        onClick={this.handleDetail}
+                      >
+                        <i className="fa fa-list" aria-hidden="true" />
+                      </button>
+                    </td>
                     <td>
                       <i className="fa fa-heart" aria-hidden="true" />
                     </td>
