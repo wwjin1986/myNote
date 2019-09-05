@@ -13,7 +13,7 @@
 .Note-form {
   background-color: white;
   width: 80%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   position: relative;
   top: 2em;
@@ -43,7 +43,7 @@
 .Note-table {
   background-color: white;
   width: 80%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
   position: relative;
   top: 2em;
