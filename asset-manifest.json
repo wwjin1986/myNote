@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/myNote/static/css/main.c521dddc.chunk.css",
+    "main.css": "/myNote/static/css/main.621f37d8.chunk.css",
     "main.js": "/myNote/static/js/main.8ac531b2.chunk.js",
     "main.js.map": "/myNote/static/js/main.8ac531b2.chunk.js.map",
     "runtime~main.js": "/myNote/static/js/runtime~main.bb6252b6.js",
@@ -9,10 +9,10 @@
     "static/js/2.f3509255.chunk.js": "/myNote/static/js/2.f3509255.chunk.js",
     "static/js/2.f3509255.chunk.js.map": "/myNote/static/js/2.f3509255.chunk.js.map",
     "index.html": "/myNote/index.html",
-    "precache-manifest.4a57ae081ffff2b5bb099316d37308d0.js": "/myNote/precache-manifest.4a57ae081ffff2b5bb099316d37308d0.js",
+    "precache-manifest.b96616c18f679760071355b66e8682f1.js": "/myNote/precache-manifest.b96616c18f679760071355b66e8682f1.js",
     "service-worker.js": "/myNote/service-worker.js",
     "static/css/2.59e401da.chunk.css.map": "/myNote/static/css/2.59e401da.chunk.css.map",
-    "static/css/main.c521dddc.chunk.css.map": "/myNote/static/css/main.c521dddc.chunk.css.map",
+    "static/css/main.621f37d8.chunk.css.map": "/myNote/static/css/main.621f37d8.chunk.css.map",
     "static/media/font-awesome.css": "/myNote/static/media/fontawesome-webfont.fee66e71.woff"
   }
 }
