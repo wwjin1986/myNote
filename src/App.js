@@ -6,6 +6,7 @@ import ViewNote from "./components/ViewNote";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import ViewAllNotes from "./components/ViewAllNotes";
+import EditNote from "./components/EditNote";
 function App() {
   return (
     <React.Fragment>
@@ -18,7 +19,8 @@ function App() {
             <Route path="/addnote" component={Note} />
             <Route path="/viewnote/:id" component={ViewNote} />
             <Route path="/viewallnotes" component={ViewAllNotes} />
-            <Route path="/" component={ViewNote} />
+            <Route path="/editnote/:id" component={EditNote} />
+            <Route path="/" component={ViewAllNotes} />
           </Switch>
         </div>
       </div>

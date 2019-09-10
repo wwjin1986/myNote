@@ -24,7 +24,7 @@ class ViewAllNotes extends Component {
       await fetchDeleteAPI(
         config.apiEndPoint + "/notes/" + event.currentTarget.id
       );
-      await fetchGetAPI(config.apiEndPoint + "/notes")
+      await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
         .then(data =>
           Object.keys(data).length
             ? this.setState({
@@ -42,7 +42,7 @@ class ViewAllNotes extends Component {
   };
 
   handleSort = async event => {
-    if (event.target.id === "sortByTopic") {
+    if (event.currentTarget.id === "sortByTopic") {
       this.setState({ sortById: "" });
       if (this.state.sortByTopic === "fa fa-sort-desc") {
         this.setState({ sortByTopic: "fa fa-sort-asc" });
@@ -71,7 +71,7 @@ class ViewAllNotes extends Component {
             throw error;
           });
       }
-    } else if (event.target.id === "sortById") {
+    } else if (event.currentTarget.id === "sortById") {
       this.setState({ sortByTopic: "" });
       if (this.state.sortById === "fa fa-sort-desc") {
         this.setState({ sortById: "fa fa-sort-asc" });

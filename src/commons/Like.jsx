@@ -5,7 +5,10 @@ class Like extends Component {
   state = { liked: this.props.liked };
   handleLiked = async () => {
     this.setState({ liked: !this.state.liked });
-    await fetchPutAPI(config.apiEndPoint + "/notes/" + this.props.id);
+    await fetchPutAPI(
+      config.apiEndPoint + "/notes/" + this.props.id + "/like",
+      ""
+    );
   };
   render() {
     return (

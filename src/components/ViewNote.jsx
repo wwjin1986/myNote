@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import "../css/Note.css";
 import fetchGetAPI from "../commons/fetchGetAPI";
 import config from "../commons/config.json";
+import fetchDeleteAPI from "../commons/fetchDeleteAPI";
 class ViewNote extends Component {
   state = { topic: "", noteText: "", url: "", updatedAt: "", title: "" };
   async componentDidMount() {
     let id = this.props.match.params.id;
+    this.setState({ id: id });
     fetchGetAPI(config.apiEndPoint + "/notes/" + id).then(data => {
       let time = new Date();
       time.setTime(data.updatedAt);
@@ -19,18 +21,17 @@ class ViewNote extends Component {
       });
     });
   }
-  handleDelete = () => {
-    console.log("handleDelete");
+  handleDelete = async () => {
+    if (window.confirm("Are you sure to delete this note?")) {
+      await fetchDeleteAPI(config.apiEndPoint + "/notes/" + this.state.id);
+      this.props.history.push("/viewallnotes");
+    }
   };
   handleEdit = () => {
-    console.log("edit");
+    this.props.history.push("/editnote/" + this.state.id);
   };
   handleChanglePage = event => {
-    if (event.target.id === "viewTopic") {
-      this.props.history.push("/notes/allnotes");
-    } else {
-      console.log(event.target.id);
-    }
+    this.props.history.push("/viewallnotes");
   };
   render() {
     return (
@@ -38,7 +39,7 @@ class ViewNote extends Component {
         <div className="Note-header">
           <i className="fa fa-check-square-o" aria-hidden="true" />
           {"  "}
-          <a>New note added</a>
+          <a>View note details</a>
         </div>
         <div className="Note-body">
           <div className="Note-table">
