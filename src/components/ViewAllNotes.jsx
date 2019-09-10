@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import fetchGetAPI from "../commons/fetchGetAPI";
 import config from "../commons/config.json";
+import fetchDeleteAPI from "../commons/fetchDeleteAPI";
+import Like from "../commons/Like";
 class ViewAllNotes extends Component {
-  state = { notes: [] };
+  state = { notes: [], sortById: "fa fa-sort-desc" };
   async componentDidMount() {
-    fetchGetAPI(config.apiEndPoint + "/notes")
+    await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
       .then(data =>
         Object.keys(data).length
           ? this.setState({
@@ -17,11 +19,88 @@ class ViewAllNotes extends Component {
       });
   }
 
-  handleDelete = event => {
-    console.log(event.currentTarget.id);
+  handleDelete = async event => {
+    if (window.confirm("Are you sure you wish to delete this note?")) {
+      await fetchDeleteAPI(
+        config.apiEndPoint + "/notes/" + event.currentTarget.id
+      );
+      await fetchGetAPI(config.apiEndPoint + "/notes")
+        .then(data =>
+          Object.keys(data).length
+            ? this.setState({
+                notes: data
+              })
+            : {}
+        )
+        .catch(error => {
+          throw error;
+        });
+    }
   };
   handleDetail = event => {
     this.props.history.push("/viewnote/" + event.currentTarget.id);
+  };
+
+  handleSort = async event => {
+    if (event.target.id === "sortByTopic") {
+      this.setState({ sortById: "" });
+      if (this.state.sortByTopic === "fa fa-sort-desc") {
+        this.setState({ sortByTopic: "fa fa-sort-asc" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/topic/ASC")
+          .then(data =>
+            Object.keys(data).length
+              ? this.setState({
+                  notes: data
+                })
+              : {}
+          )
+          .catch(error => {
+            throw error;
+          });
+      } else {
+        this.setState({ sortByTopic: "fa fa-sort-desc" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/topic/DESC")
+          .then(data =>
+            Object.keys(data).length
+              ? this.setState({
+                  notes: data
+                })
+              : {}
+          )
+          .catch(error => {
+            throw error;
+          });
+      }
+    } else if (event.target.id === "sortById") {
+      this.setState({ sortByTopic: "" });
+      if (this.state.sortById === "fa fa-sort-desc") {
+        this.setState({ sortById: "fa fa-sort-asc" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/id/ASC")
+          .then(data =>
+            Object.keys(data).length
+              ? this.setState({
+                  notes: data
+                })
+              : {}
+          )
+          .catch(error => {
+            throw error;
+          });
+      } else {
+        this.setState({ sortById: "fa fa-sort-desc" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
+          .then(data =>
+            Object.keys(data).length
+              ? this.setState({
+                  notes: data
+                })
+              : {}
+          )
+          .catch(error => {
+            throw error;
+          });
+      }
+    }
   };
   render() {
     return (
@@ -32,8 +111,14 @@ class ViewAllNotes extends Component {
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Topic</th>
+                  <th scope="col" id="sortById" onClick={this.handleSort}>
+                    #{"  "}
+                    <i className={this.state.sortById} aria-hidden="true" />
+                  </th>
+                  <th scope="col" id="sortByTopic" onClick={this.handleSort}>
+                    Topic{"  "}
+                    <i className={this.state.sortByTopic} aria-hidden="true" />
+                  </th>
                   <th scope="col">Title</th>
                   <th scope="col">Delete</th>
                   <th scope="col">Detail</th>
@@ -52,6 +137,7 @@ class ViewAllNotes extends Component {
                         id={note.id}
                         onClick={this.handleDelete}
                       >
+                        {note.liked}
                         <i className="fa fa-trash-o" aria-hidden="true" />
                       </button>
                     </td>
@@ -65,7 +151,7 @@ class ViewAllNotes extends Component {
                       </button>
                     </td>
                     <td>
-                      <i className="fa fa-heart" aria-hidden="true" />
+                      <Like liked={note.liked} id={note.id} />
                     </td>
                   </tr>
                 ))}

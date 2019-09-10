@@ -36,7 +36,8 @@ class Note extends Component {
       topic: this.state.topic,
       title: this.state.title,
       url: this.state.URL,
-      noteText: this.state.noteText
+      noteText: this.state.noteText,
+      liked: false
     });
     fetchPostAPI(config.apiEndPoint + "/notes", body).then(data =>
       this.props.history.push("/viewnote/" + data.id)

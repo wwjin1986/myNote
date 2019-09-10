@@ -34,3 +34,8 @@ span {
   background-color: #46546b;
   color: white !important;
 }
+
+th,
+i:hover {
+  cursor: pointer;
+}
