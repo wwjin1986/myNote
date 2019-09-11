@@ -109,7 +109,7 @@ class ViewNote extends Component {
                 className="btn btn-view-custom"
                 onClick={this.handleChanglePage}
               >
-                View notes about "<b>{this.state.topic}</b>"
+                View all notes
               </button>
             </div>
           </div>

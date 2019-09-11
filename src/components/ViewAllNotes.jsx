@@ -4,9 +4,20 @@ import config from "../commons/config.json";
 import fetchDeleteAPI from "../commons/fetchDeleteAPI";
 import Like from "../commons/Like";
 class ViewAllNotes extends Component {
-  state = { notes: [], sortById: "fa fa-sort-desc" };
+  state = {
+    notes: [],
+    sortByUpdated: "fa fa-sort-desc",
+    sortedBy: "updatedAt",
+    direction: "DESC"
+  };
   async componentDidMount() {
-    await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
+    await fetchGetAPI(
+      config.apiEndPoint +
+        "/notes/" +
+        this.state.sortedBy +
+        "/" +
+        this.state.direction
+    )
       .then(data =>
         Object.keys(data).length
           ? this.setState({
@@ -24,7 +35,13 @@ class ViewAllNotes extends Component {
       await fetchDeleteAPI(
         config.apiEndPoint + "/notes/" + event.currentTarget.id
       );
-      await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
+      await fetchGetAPI(
+        config.apiEndPoint +
+          "/notes/" +
+          this.state.sortedBy +
+          "/" +
+          this.state.direction
+      )
         .then(data =>
           Object.keys(data).length
             ? this.setState({
@@ -43,9 +60,9 @@ class ViewAllNotes extends Component {
 
   handleSort = async event => {
     if (event.currentTarget.id === "sortByTopic") {
-      this.setState({ sortById: "" });
+      this.setState({ sortByUpdated: "", sortedBy: "topic" });
       if (this.state.sortByTopic === "fa fa-sort-desc") {
-        this.setState({ sortByTopic: "fa fa-sort-asc" });
+        this.setState({ sortByTopic: "fa fa-sort-asc", direction: "ASC" });
         await fetchGetAPI(config.apiEndPoint + "/notes/topic/ASC")
           .then(data =>
             Object.keys(data).length
@@ -58,7 +75,7 @@ class ViewAllNotes extends Component {
             throw error;
           });
       } else {
-        this.setState({ sortByTopic: "fa fa-sort-desc" });
+        this.setState({ sortByTopic: "fa fa-sort-desc", direction: "DESC" });
         await fetchGetAPI(config.apiEndPoint + "/notes/topic/DESC")
           .then(data =>
             Object.keys(data).length
@@ -71,11 +88,11 @@ class ViewAllNotes extends Component {
             throw error;
           });
       }
-    } else if (event.currentTarget.id === "sortById") {
-      this.setState({ sortByTopic: "" });
-      if (this.state.sortById === "fa fa-sort-desc") {
-        this.setState({ sortById: "fa fa-sort-asc" });
-        await fetchGetAPI(config.apiEndPoint + "/notes/id/ASC")
+    } else if (event.currentTarget.id === "sortByUpdated") {
+      this.setState({ sortByTopic: "", sortedBy: "updatedAt" });
+      if (this.state.sortByUpdated === "fa fa-sort-desc") {
+        this.setState({ sortByUpdated: "fa fa-sort-asc", direction: "ASC" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/updatedAt/ASC")
           .then(data =>
             Object.keys(data).length
               ? this.setState({
@@ -87,8 +104,8 @@ class ViewAllNotes extends Component {
             throw error;
           });
       } else {
-        this.setState({ sortById: "fa fa-sort-desc" });
-        await fetchGetAPI(config.apiEndPoint + "/notes/id/DESC")
+        this.setState({ sortByUpdated: "fa fa-sort-desc", direction: "DESC" });
+        await fetchGetAPI(config.apiEndPoint + "/notes/updatedAt/DESC")
           .then(data =>
             Object.keys(data).length
               ? this.setState({
@@ -111,9 +128,12 @@ class ViewAllNotes extends Component {
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
-                  <th scope="col" id="sortById" onClick={this.handleSort}>
-                    #{"  "}
-                    <i className={this.state.sortById} aria-hidden="true" />
+                  <th scope="col" id="sortByUpdated" onClick={this.handleSort}>
+                    Updated Time{"  "}
+                    <i
+                      className={this.state.sortByUpdated}
+                      aria-hidden="true"
+                    />
                   </th>
                   <th scope="col" id="sortByTopic" onClick={this.handleSort}>
                     Topic{"  "}
@@ -128,7 +148,7 @@ class ViewAllNotes extends Component {
               <tbody>
                 {this.state.notes.map(note => (
                   <tr key={note.id}>
-                    <td>{note.id}</td>
+                    <td>{new Date(note.updatedAt).toLocaleString()}</td>
                     <td>{note.topic}</td>
                     <td>{note.title}</td>
                     <td>
