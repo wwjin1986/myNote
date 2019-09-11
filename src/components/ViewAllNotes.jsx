@@ -140,9 +140,9 @@ class ViewAllNotes extends Component {
                     <i className={this.state.sortByTopic} aria-hidden="true" />
                   </th>
                   <th scope="col">Title</th>
-                  <th scope="col">Delete</th>
                   <th scope="col">Detail</th>
-                  <th scope="col">Like</th>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Bookmark</th>
                 </tr>
               </thead>
               <tbody>
@@ -155,19 +155,19 @@ class ViewAllNotes extends Component {
                       <button
                         className="btn btn-outline-dark btn-sm"
                         id={note.id}
-                        onClick={this.handleDelete}
+                        onClick={this.handleDetail}
                       >
-                        {note.liked}
-                        <i className="fa fa-trash-o" aria-hidden="true" />
+                        <i className="fa fa-list" aria-hidden="true" />
                       </button>
                     </td>
                     <td>
                       <button
                         className="btn btn-outline-dark btn-sm"
                         id={note.id}
-                        onClick={this.handleDetail}
+                        onClick={this.handleDelete}
                       >
-                        <i className="fa fa-list" aria-hidden="true" />
+                        {note.liked}
+                        <i className="fa fa-trash-o" aria-hidden="true" />
                       </button>
                     </td>
                     <td>

@@ -29,7 +29,13 @@ const NavBar = () => {
 
             <li className="nav-item active">
               <Link className="nav-link nav-custom" to={"/addnote"}>
-                Add new Note
+                Add Note
+              </Link>
+            </li>
+
+            <li className="nav-item active">
+              <Link className="nav-link nav-custom" to={"/"}>
+                All Notes
               </Link>
             </li>
           </ul>

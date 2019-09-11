@@ -14,9 +14,9 @@ class Like extends Component {
     return (
       <div>
         {this.state.liked === true ? (
-          <i className="fa fa-heart" onClick={this.handleLiked} />
+          <i className="fa fa-bookmark" onClick={this.handleLiked} />
         ) : (
-          <i className="fa fa-heart-o" onClick={this.handleLiked} />
+          <i className="fa fa-bookmark-o" onClick={this.handleLiked} />
         )}
       </div>
     );
