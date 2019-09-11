@@ -3,12 +3,15 @@ import fetchGetAPI from "../commons/fetchGetAPI";
 import config from "../commons/config.json";
 import fetchDeleteAPI from "../commons/fetchDeleteAPI";
 import Like from "../commons/Like";
+import Pagination from "../commons/Pagination";
 class ViewAllNotes extends Component {
   state = {
     notes: [],
     sortByUpdated: "fa fa-sort-desc",
     sortedBy: "updatedAt",
-    direction: "DESC"
+    direction: "DESC",
+    pageSize: 10,
+    currentPage: 1
   };
   async componentDidMount() {
     await fetchGetAPI(
@@ -119,10 +122,27 @@ class ViewAllNotes extends Component {
       }
     }
   };
+
+  //handle page change on pagination
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
   render() {
+    const {
+      sortByTopic,
+      pageSize,
+      sortByUpdated,
+      notes,
+      currentPage
+    } = this.state;
+    console.log(currentPage);
     return (
       <React.Fragment>
-        <div className="Note-header">All Notes</div>
+        <div className="Note-header">
+          <i className="fa fa-file-text-o" aria-hidden="true" />
+          {"   "}
+          View all notes
+        </div>
         <div className="Note-body">
           <div className="Note-table">
             <table className="table table-striped table-hover">
@@ -130,14 +150,11 @@ class ViewAllNotes extends Component {
                 <tr>
                   <th scope="col" id="sortByUpdated" onClick={this.handleSort}>
                     Updated Time{"  "}
-                    <i
-                      className={this.state.sortByUpdated}
-                      aria-hidden="true"
-                    />
+                    <i className={sortByUpdated} aria-hidden="true" />
                   </th>
                   <th scope="col" id="sortByTopic" onClick={this.handleSort}>
                     Topic{"  "}
-                    <i className={this.state.sortByTopic} aria-hidden="true" />
+                    <i className={sortByTopic} aria-hidden="true" />
                   </th>
                   <th scope="col">Title</th>
                   <th scope="col">Detail</th>
@@ -146,7 +163,7 @@ class ViewAllNotes extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.notes.map(note => (
+                {notes.map(note => (
                   <tr key={note.id}>
                     <td>{new Date(note.updatedAt).toLocaleString()}</td>
                     <td>{note.topic}</td>
@@ -177,6 +194,20 @@ class ViewAllNotes extends Component {
                 ))}
               </tbody>
             </table>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginRight: "2em"
+              }}
+            >
+              <Pagination
+                itemCount={notes.length}
+                pageSize={pageSize}
+                onPageChange={this.handlePageChange}
+                currentPage={currentPage}
+              />
+            </div>
           </div>
         </div>
       </React.Fragment>

@@ -37,7 +37,7 @@ class ViewNote extends Component {
     return (
       <React.Fragment>
         <div className="Note-header">
-          <i className="fa fa-check-square-o" aria-hidden="true" />
+          <i className="fa fa-list-alt" aria-hidden="true" />
           {"  "}
           <a>View note details</a>
         </div>

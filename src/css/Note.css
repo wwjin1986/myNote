@@ -72,3 +72,7 @@ table caption {
   margin-left: 1em;
   margin-bottom: 2em;
 }
+
+.pagination > .active > a {
+  background-color: #46546b !important;
+}
