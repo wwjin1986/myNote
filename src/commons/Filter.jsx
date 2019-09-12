@@ -17,10 +17,10 @@ class Filter extends Component {
       });
   }
   handleFilter = event => {
-    // event.currentTarget.style.backgroundColor = "red";
-    // console.log(event.target.style.backgroundColor);
+    this.setState({ topic: event.currentTarget.id });
   };
   render() {
+    const { items, onItemSelect, filteredBy } = this.props;
     return (
       <div className="btn-group">
         <button
@@ -34,7 +34,7 @@ class Filter extends Component {
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Filter by <b>topic</b>
+          Filter by <b>{filteredBy}</b>
           {"  "}
         </button>
         <div className="dropdown-menu">
@@ -42,12 +42,20 @@ class Filter extends Component {
             <a
               className="dropdown-item"
               key={category.id}
-              onClick={this.handleFilter}
+              onClick={() => onItemSelect(category.topic)}
               id={category.topic}
             >
               {category.topic}
             </a>
           ))}
+          <div class="dropdown-divider" />
+          <a
+            class="dropdown-item"
+            id="all"
+            onClick={() => onItemSelect("topic")}
+          >
+            Show all notes
+          </a>
         </div>
       </div>
     );

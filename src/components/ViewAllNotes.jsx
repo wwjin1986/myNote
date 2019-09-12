@@ -12,8 +12,9 @@ class ViewAllNotes extends Component {
     sortByUpdated: "fa fa-sort-desc",
     sortedBy: "updatedAt",
     direction: "DESC",
-    pageSize: 9,
-    currentPage: 1
+    pageSize: 8,
+    currentPage: 1,
+    filteredBy: "topic"
   };
   async componentDidMount() {
     await fetchGetAPI(
@@ -129,15 +130,24 @@ class ViewAllNotes extends Component {
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
+
+  handleItemSelect = topic => {
+    this.setState({ filteredBy: topic });
+  };
   render() {
     const {
       sortByTopic,
       pageSize,
       sortByUpdated,
       notes,
-      currentPage
+      currentPage,
+      filteredBy
     } = this.state;
-    const paginatedNotes = paginate(notes, currentPage, pageSize);
+    const filtered =
+      filteredBy === "topic"
+        ? notes
+        : notes.filter(m => m.topic === filteredBy);
+    const paginatedNotes = paginate(filtered, currentPage, pageSize);
 
     return (
       <React.Fragment>
@@ -156,7 +166,11 @@ class ViewAllNotes extends Component {
             View all notes
           </div>
           <div style={{ width: "45%", display: "inline-block" }}>
-            <Filter />
+            <Filter
+              items={notes}
+              onItemSelect={this.handleItemSelect}
+              filteredBy={filteredBy}
+            />
           </div>
         </div>
         <div className="Note-body">
@@ -229,7 +243,7 @@ class ViewAllNotes extends Component {
               }}
             >
               <Pagination
-                itemCount={notes.length}
+                itemCount={filtered.length}
                 pageSize={pageSize}
                 onPageChange={this.handlePageChange}
                 currentPage={currentPage}
