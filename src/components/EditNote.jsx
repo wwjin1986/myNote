@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import fetchGetAPI from "../commons/fetchGetAPI";
-import config from "../commons/config.json";
-import fetchPostAPI from "../commons/fetchPostAPI";
-import fetchPutAPI from "../commons/fetchPutAPI";
+import fetchGetAPI from "../utils/fetchGetAPI";
+import config from "../utils/config.json";
+import fetchPostAPI from "../utils/fetchPostAPI";
+import fetchPutAPI from "../utils/fetchPutAPI";
 class EditNote extends Component {
   state = {
     id: "",

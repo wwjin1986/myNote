@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import fetchGetAPI from "../utils/fetchGetAPI";
-import config from "../commons/config.json";
+import config from "../utils/config.json";
 import fetchDeleteAPI from "../utils/fetchDeleteAPI";
 import Like from "../commons/Like";
 import Pagination from "../commons/Pagination";
@@ -137,8 +137,7 @@ class ViewAllNotes extends Component {
       currentPage
     } = this.state;
     const paginatedNotes = paginate(notes, currentPage, pageSize);
-    console.log(notes);
-    console.log(paginatedNotes);
+
     return (
       <React.Fragment>
         <div className="Note-header">

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "../css/Note.css";
-import fetchGetAPI from "../commons/fetchGetAPI";
-import config from "../commons/config.json";
-import fetchPostAPI from "../commons/fetchPostAPI";
+import fetchGetAPI from "../utils/fetchGetAPI";
+import config from "../utils/config.json";
+import fetchPostAPI from "../utils/fetchPostAPI";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { withRouter } from "react-router-dom";
 

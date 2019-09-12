@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "../css/Note.css";
-import fetchGetAPI from "../commons/fetchGetAPI";
-import config from "../commons/config.json";
-import fetchDeleteAPI from "../commons/fetchDeleteAPI";
+import fetchGetAPI from "../utils/fetchGetAPI";
+import config from "../utils/config.json";
+import fetchDeleteAPI from "../utils/fetchDeleteAPI";
 class ViewNote extends Component {
   state = { topic: "", noteText: "", url: "", updatedAt: "", title: "" };
   async componentDidMount() {
