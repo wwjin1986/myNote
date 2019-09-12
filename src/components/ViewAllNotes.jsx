@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import fetchGetAPI from "../commons/fetchGetAPI";
+import fetchGetAPI from "../utils/fetchGetAPI";
 import config from "../commons/config.json";
-import fetchDeleteAPI from "../commons/fetchDeleteAPI";
+import fetchDeleteAPI from "../utils/fetchDeleteAPI";
 import Like from "../commons/Like";
 import Pagination from "../commons/Pagination";
+import { paginate } from "../utils/paginate";
 class ViewAllNotes extends Component {
   state = {
     notes: [],
     sortByUpdated: "fa fa-sort-desc",
     sortedBy: "updatedAt",
     direction: "DESC",
-    pageSize: 10,
+    pageSize: 9,
     currentPage: 1
   };
   async componentDidMount() {
@@ -135,7 +136,9 @@ class ViewAllNotes extends Component {
       notes,
       currentPage
     } = this.state;
-    console.log(currentPage);
+    const paginatedNotes = paginate(notes, currentPage, pageSize);
+    console.log(notes);
+    console.log(paginatedNotes);
     return (
       <React.Fragment>
         <div className="Note-header">
@@ -163,7 +166,7 @@ class ViewAllNotes extends Component {
                 </tr>
               </thead>
               <tbody>
-                {notes.map(note => (
+                {paginatedNotes.map(note => (
                   <tr key={note.id}>
                     <td>{new Date(note.updatedAt).toLocaleString()}</td>
                     <td>{note.topic}</td>
