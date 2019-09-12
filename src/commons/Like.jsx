@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import config from "./config.json";
-import fetchPutAPI from "./fetchPutAPI";
+import config from "../utils/config.json";
+import fetchPutAPI from "../utils/fetchPutAPI";
 class Like extends Component {
   state = { liked: this.props.liked };
   handleLiked = async () => {
