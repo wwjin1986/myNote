@@ -47,9 +47,17 @@
   margin: 0 auto;
   position: relative;
   top: 2em;
-  text-align: center;
+  table-layout: fixed;
 }
-
+th,
+td {
+  overflow: hidden;
+  max-width: 150px;
+}
+.col-small {
+  overflow: hidden;
+  max-width: 50px;
+}
 a {
   font-size: 0.8em;
 }
@@ -75,4 +83,13 @@ table caption {
 
 .pagination > .active > a {
   background-color: #46546b !important;
+}
+.dropdown-menu a {
+  height: 30px !important;
+  padding-top: 0px !important;
+  line-height: 30px;
+}
+.dropdown-menu a:hover {
+  background-color: #46546b !important;
+  color: white !important;
 }

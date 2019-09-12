@@ -73,7 +73,7 @@ class ViewNote extends Component {
                     <label className="my-1 mr-2">Note</label>
                   </th>
                   <td>
-                    <p style={{ whiteSpace: "pre-line" }}>
+                    <p style={{ whiteSpace: "pre-wrap", textAlign: "justify" }}>
                       {this.state.noteText}
                     </p>
                   </td>

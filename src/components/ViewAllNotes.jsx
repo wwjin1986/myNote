@@ -5,6 +5,7 @@ import fetchDeleteAPI from "../utils/fetchDeleteAPI";
 import Like from "../commons/Like";
 import Pagination from "../commons/Pagination";
 import { paginate } from "../utils/paginate";
+import Filter from "../commons/Filter";
 class ViewAllNotes extends Component {
   state = {
     notes: [],
@@ -141,9 +142,22 @@ class ViewAllNotes extends Component {
     return (
       <React.Fragment>
         <div className="Note-header">
-          <i className="fa fa-file-text-o" aria-hidden="true" />
-          {"   "}
-          View all notes
+          <div
+            style={{
+              width: "55%",
+              marginRight: 0,
+              display: "inline-block",
+              textAlign: "right"
+            }}
+          >
+            {" "}
+            <i className="fa fa-file-text-o" aria-hidden="true" />
+            {"   "}
+            View all notes
+          </div>
+          <div style={{ width: "45%", display: "inline-block" }}>
+            <Filter />
+          </div>
         </div>
         <div className="Note-body">
           <div className="Note-table">
@@ -154,23 +168,34 @@ class ViewAllNotes extends Component {
                     Updated Time{"  "}
                     <i className={sortByUpdated} aria-hidden="true" />
                   </th>
-                  <th scope="col" id="sortByTopic" onClick={this.handleSort}>
+                  <th
+                    scope="col"
+                    style={{ maxWidth: "80px" }}
+                    id="sortByTopic"
+                    onClick={this.handleSort}
+                  >
                     Topic{"  "}
                     <i className={sortByTopic} aria-hidden="true" />
                   </th>
                   <th scope="col">Title</th>
-                  <th scope="col">Detail</th>
-                  <th scope="col">Delete</th>
-                  <th scope="col">Bookmark</th>
+                  <th scope="col" className="col-small">
+                    Detail
+                  </th>
+                  <th scope="col" className="col-small">
+                    Delete
+                  </th>
+                  <th scope="col" className="col-small">
+                    Bookmark
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {paginatedNotes.map(note => (
                   <tr key={note.id}>
                     <td>{new Date(note.updatedAt).toLocaleString()}</td>
-                    <td>{note.topic}</td>
+                    <td style={{ maxWidth: "80px" }}>{note.topic}</td>
                     <td>{note.title}</td>
-                    <td>
+                    <td className="col-small">
                       <button
                         className="btn btn-outline-dark btn-sm"
                         id={note.id}
@@ -179,7 +204,7 @@ class ViewAllNotes extends Component {
                         <i className="fa fa-list" aria-hidden="true" />
                       </button>
                     </td>
-                    <td>
+                    <td className="col-small">
                       <button
                         className="btn btn-outline-dark btn-sm"
                         id={note.id}
@@ -189,7 +214,7 @@ class ViewAllNotes extends Component {
                         <i className="fa fa-trash-o" aria-hidden="true" />
                       </button>
                     </td>
-                    <td>
+                    <td className="col-small">
                       <Like liked={note.liked} id={note.id} />
                     </td>
                   </tr>

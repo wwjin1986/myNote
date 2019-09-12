@@ -6,7 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import { HashRouter } from "react-router-dom";
-
+import "bootstrap";
+import "bootstrap/dist/js/bootstrap.js";
+import $ from "jquery";
+import Popper from "popper.js";
 ReactDOM.render(
   <HashRouter>
     <App />
